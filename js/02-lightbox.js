@@ -10,12 +10,16 @@ const markup = makeMarkup(galleryItems);
 galleryRef.insertAdjacentHTML('beforeend', markup);
 
 ////Крок 2 
-///ініціація лайтбоксу
-var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+///ініціація і модифікація підпису лайтбоксу 
+var lightbox = new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionSelector: 'img',
+    captionType: 'attr',
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
+});
 
-
-////Крок 3 реакція на клік по картинці
-// galleryRef.addEventListener('click', openModal)
 
 function makeMarkup(images) {
     return images
@@ -33,12 +37,7 @@ function makeMarkup(images) {
 };
 
 
-// function openModal(e) {
-//     const originalImage = e.target.closest('.gallery__item').getAttribute('href');
-//     console.log(originalImage);
-    
-// }
 
 
-//////як не дозволити виконатись href////
+//////як не дозволити виконатись href - запустити Simple LightBox ще до першого кліку, все решта зробиться "піл капотом"
 ////
