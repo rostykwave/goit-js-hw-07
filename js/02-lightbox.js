@@ -2,16 +2,21 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 console.log(galleryItems);
-
+// Крок 1
 const galleryRef = document.querySelector('.gallery');
+////Створення розмітки з файлу gallery-items
 const markup = makeMarkup(galleryItems);
-galleryRef.insertAdjacentHTML('beforeend', markup )
+////Вставлення розміки
+galleryRef.insertAdjacentHTML('beforeend', markup);
+
+////Крок 2
+galleryRef.addEventListener('click', openModal)
 
 function makeMarkup(images) {
     return images
         .map(({ preview, original, description }) => {
             return `
-        <a class="gallery__item" href="${original}">
+        <a class="gallery__item" href="${original}" target="_blank" rel="noopener noreferrer">
   <img 
   class="gallery__image" 
   src="${preview}" 
@@ -21,3 +26,12 @@ function makeMarkup(images) {
         })
         .join('');
 };
+
+
+function openModal(e) {
+    console.log('ghf');
+}
+
+
+//////як не дозволити виконатись href////
+////
