@@ -29,7 +29,8 @@ function makeMarkup(images) {
 
 
 function openModal(e) {
-    console.log('ghf');
+    const originalImage = e.target.closest('.gallery__item').getAttribute('href');
+    console.log(originalImage);
 }
 
 
