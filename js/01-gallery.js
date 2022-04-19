@@ -13,6 +13,9 @@ galleryContainer.insertAdjacentHTML('beforeend', cardsMarkup);
 ////Крок 2
 galleryContainer.addEventListener('click', onImageClick);
 
+///Крок 3 ESC - додаємо слухача Escape тоді, коли модалка відкрита
+// document.addEventListener('keydown', onESCKeydown);
+
 
 
 
@@ -41,18 +44,60 @@ function createCardsMarkup(images) {
 ////href="${original}"
 
 function onImageClick(e) {
-  console.log(e.target.nodeName);
+
   if (e.target.nodeName !== 'IMG') {
     return;
   }
-  console.log(e.target.getAttribute('data-source'));
+
+  
   const originalImageSource = e.target.getAttribute('data-source');
 
-  basicLightbox.create(`
+  const instance = basicLightbox.create(`
 		<img src="${originalImageSource}">
-	`).show()
+	`,
+    {
+      onShow: (instance) => {
+        document.addEventListener('keydown', (e) => {
+          if (e.code === 'Escape') {
+            console.log(instance);
+            instance.close();
+          }
+    }); },
+      onClose: (instance) => { document.removeEventListener('keydown', (e) => {
+          if (e.code === 'Escape') {
+            console.log(instance);
+            instance.close();
+          }
+    }); }
+    });
+  
+  instance.show();
+
+  ///додаємо слухача Escape тоді, коли модалка відкрита
+  // document.addEventListener('keydown', onESCKeydown);
 
 }
 
+function onESCKeydown(e) {
+  console.log(e);
 
+  if (e.code === 'Escape') {
+    console.log('key', e.key);
+    console.log('code', e.code);
+    // console.log(instance);
+    instance.close();
+  }
+}
+
+
+
+///Як з'єднати instance між двома функціями
+
+// function onCloseModal() {
+  
+// document.removeEventListener('keydown', onESCKeydown);
+// }
+
+
+// Завдання або запитання ментору
 ///Як блокувати перехід властивостіі href тегу a при кліку, не видаляючи його
