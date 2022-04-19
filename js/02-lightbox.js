@@ -31,6 +31,9 @@ function makeMarkup(images) {
 function openModal(e) {
     const originalImage = e.target.closest('.gallery__item').getAttribute('href');
     console.log(originalImage);
+
+    var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+    
 }
 
 
