@@ -48,56 +48,34 @@ function onImageClick(e) {
   if (e.target.nodeName !== 'IMG') {
     return;
   }
-
-  
+  ////взяття посилання на оригінальну картинку
   const originalImageSource = e.target.getAttribute('data-source');
 
+  /////Звернення до LightBox 
   const instance = basicLightbox.create(`
 		<img src="${originalImageSource}">
 	`,
     {
       onShow: (instance) => {
-        document.addEventListener('keydown', (e) => {
-          if (e.code === 'Escape') {
-            console.log(instance);
-            instance.close();
-          }
-    }); },
-      onClose: (instance) => { document.removeEventListener('keydown', (e) => {
-          if (e.code === 'Escape') {
-            console.log(instance);
-            instance.close();
-          }
-    }); }
+        document.addEventListener('keydown', onESCKeydown); },
+      onClose: (instance) => { document.removeEventListener('keydown', onESCKeydown); }
     });
-  
+  ///показ модалки
   instance.show();
-
-  ///додаємо слухача Escape тоді, коли модалка відкрита
-  // document.addEventListener('keydown', onESCKeydown);
-
-}
-
-function onESCKeydown(e) {
-  console.log(e);
-
+  ///приховання модалки
+  function onESCKeydown(e) {
   if (e.code === 'Escape') {
-    console.log('key', e.key);
-    console.log('code', e.code);
-    // console.log(instance);
     instance.close();
-  }
+    }
+    ///перевірка натискання (чи реагує після закриття модалки )
+    console.log(e.code);
 }
+}
+ ///Чи можна вкладати функцію в функцію?
 
 
-
-///Як з'єднати instance між двома функціями
-
-// function onCloseModal() {
-  
-// document.removeEventListener('keydown', onESCKeydown);
-// }
-
-
+//////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // Завдання або запитання ментору
 ///Як блокувати перехід властивостіі href тегу a при кліку, не видаляючи його
+///Чи можна вкладати функцію в функцію?
+// function onESCKeydown(e) 
