@@ -9,8 +9,13 @@ const markup = makeMarkup(galleryItems);
 ////Вставлення розміки
 galleryRef.insertAdjacentHTML('beforeend', markup);
 
-////Крок 2
-galleryRef.addEventListener('click', openModal)
+////Крок 2 
+///ініціація лайтбоксу
+var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+
+
+////Крок 3 реакція на клік по картинці
+// galleryRef.addEventListener('click', openModal)
 
 function makeMarkup(images) {
     return images
@@ -28,13 +33,11 @@ function makeMarkup(images) {
 };
 
 
-function openModal(e) {
-    const originalImage = e.target.closest('.gallery__item').getAttribute('href');
-    console.log(originalImage);
-
-    var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+// function openModal(e) {
+//     const originalImage = e.target.closest('.gallery__item').getAttribute('href');
+//     console.log(originalImage);
     
-}
+// }
 
 
 //////як не дозволити виконатись href////
