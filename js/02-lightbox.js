@@ -1,7 +1,7 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
+
 // Крок 1
 const galleryRef = document.querySelector('.gallery');
 ////Створення розмітки з файлу gallery-items
