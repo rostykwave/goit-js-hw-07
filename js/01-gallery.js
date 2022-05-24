@@ -1,7 +1,6 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-// console.log(galleryItems);
 
 // Крок 1
 const galleryContainer = document.querySelector('.gallery');
@@ -24,10 +23,9 @@ galleryContainer.addEventListener('click', onImageClick);
 function createCardsMarkup(images) {
     return images
         .map(({ preview, original, descrition }) => {
-            // console.log(image.description);
             return `
 <div class="gallery__item">
-  <a class="gallery__link">
+  <a class="gallery__link" href="${original}">
     <img
       class="gallery__image"
       src="${preview}"
@@ -44,6 +42,10 @@ function createCardsMarkup(images) {
 ////href="${original}"
 
 function onImageClick(e) {
+  ////Зберігання значення атрибута href
+  const defaultHref = e.target.parentNode.attributes.href.nodeValue;
+ 
+  console.log(e.code);
 
   if (e.target.nodeName !== 'IMG') {
     return;
@@ -57,6 +59,8 @@ function onImageClick(e) {
 	`,
     {
       onShow: (instance) => {
+        e.target.parentNode.attributes.href.nodeValue = 'javascript:void(0)';
+
         document.addEventListener('keydown', onESCKeydown); },
       onClose: (instance) => { document.removeEventListener('keydown', onESCKeydown); }
     });
@@ -66,6 +70,7 @@ function onImageClick(e) {
   function onESCKeydown(e) {
   if (e.code === 'Escape') {
     instance.close();
+    e.target.attributes.href.nodeValue = defaultHref;
     }
     ///перевірка натискання (чи реагує після закриття модалки )
     console.log(e.code);
@@ -78,4 +83,6 @@ function onImageClick(e) {
 // Завдання або запитання ментору
 ///Як блокувати перехід властивостіі href тегу a при кліку, не видаляючи його
 ///Чи можна вкладати функцію в функцію?
-// function onESCKeydown(e) 
+// function onESCKeydown(e)
+
+
