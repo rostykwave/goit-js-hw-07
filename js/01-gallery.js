@@ -12,10 +12,6 @@ galleryContainer.insertAdjacentHTML('beforeend', cardsMarkup);
 ////Крок 2
 galleryContainer.addEventListener('click', onImageClick);
 
-///Крок 3 ESC - додаємо слухача Escape тоді, коли модалка відкрита
-// document.addEventListener('keydown', onESCKeydown);
-
-
 
 
 // Функції
@@ -41,11 +37,10 @@ function createCardsMarkup(images) {
 ////Join() потрібна для об'єднання елементів масиву, створеного за допомогою map, в один рядок///
 ////href="${original}"
 
+
 function onImageClick(e) {
   ////Зберігання значення атрибута href
   const defaultHref = e.target.parentNode.attributes.href.nodeValue;
- 
-  console.log(e.code);
 
   if (e.target.nodeName !== 'IMG') {
     return;
@@ -59,30 +54,36 @@ function onImageClick(e) {
 	`,
     {
       onShow: (instance) => {
+        ///href отримує пусте значення, яке забороняє переходити при клінку на лінк
         e.target.parentNode.attributes.href.nodeValue = 'javascript:void(0)';
 
         document.addEventListener('keydown', onESCKeydown); },
-      onClose: (instance) => { document.removeEventListener('keydown', onESCKeydown); }
+      onClose: (instance) => { 
+        ///повертає потрібний атрибут
+        e.target.parentNode.attributes.href.nodeValue = defaultHref;
+
+        document.removeEventListener('keydown', onESCKeydown);
+      }
     });
   ///показ модалки
   instance.show();
-  ///приховання модалки
+
+  ///приховання модалки через кнопку ESC
   function onESCKeydown(e) {
   if (e.code === 'Escape') {
     instance.close();
-    e.target.attributes.href.nodeValue = defaultHref;
     }
     ///перевірка натискання (чи реагує після закриття модалки )
     console.log(e.code);
 }
 }
- ///Чи можна вкладати функцію в функцію?
 
 
 //////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // Завдання або запитання ментору
-///Як блокувати перехід властивостіі href тегу a при кліку, не видаляючи його
-///Чи можна вкладати функцію в функцію?
-// function onESCKeydown(e)
+///Як правильно блокувати перехід за посиланням href тегу 'a' при кліку, я використав тимчасову заміну вмісту href на 'javascript:void(0)'
+///Як можна і чи потрібно функцію onESCKeydown винести так, щоб вона була незалежною від конкретної події onClick?
+
+
 
 
