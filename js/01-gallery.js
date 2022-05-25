@@ -39,8 +39,7 @@ function createCardsMarkup(images) {
 
 
 function onImageClick(e) {
-  ////Зберігання значення атрибута href
-  const defaultHref = e.target.parentNode.attributes.href.nodeValue;
+  e.preventDefault()
 
   if (e.target.nodeName !== 'IMG') {
     return;
@@ -54,14 +53,8 @@ function onImageClick(e) {
 	`,
     {
       onShow: (instance) => {
-        ///href отримує пусте значення, яке забороняє переходити при клінку на лінк
-        e.target.parentNode.attributes.href.nodeValue = 'javascript:void(0)';
-
         document.addEventListener('keydown', onESCKeydown); },
       onClose: (instance) => { 
-        ///повертає потрібний атрибут
-        e.target.parentNode.attributes.href.nodeValue = defaultHref;
-
         document.removeEventListener('keydown', onESCKeydown);
       }
     });
@@ -79,10 +72,6 @@ function onImageClick(e) {
 }
 
 
-//////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// Завдання або запитання ментору
-///Як правильно блокувати перехід за посиланням href тегу 'a' при кліку, я використав тимчасову заміну вмісту href на 'javascript:void(0)'
-///Як можна і чи потрібно функцію onESCKeydown винести так, щоб вона була незалежною від конкретної події onClick?
 
 
 
